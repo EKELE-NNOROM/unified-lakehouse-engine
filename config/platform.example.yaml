@@ -1,0 +1,49 @@
+# Copy to platform.yaml and point services at your cluster endpoints.
+
+kafka:
+  bootstrap_servers: "kafka:9092"
+  consumer_group: "lakehouse-engine"
+  security_protocol: "PLAINTEXT"
+
+tidb:
+  host: tidb
+  port: 4000
+  user: root
+  password: ""
+  database: analytics
+
+vitess:
+  vtgate_host: vtgate
+  vtgate_port: 15306
+  user: root
+  password: ""
+  keyspace: commerce
+
+iceberg:
+  catalog_name: lakehouse
+  warehouse: s3://lakehouse/warehouse
+  namespace: raw
+  table: events
+
+trino:
+  host: trino
+  port: 8080
+  user: lakehouse
+  catalog: iceberg
+  trino_schema: analytics
+
+redshift:
+  host: your-cluster.region.redshift.amazonaws.com
+  port: 5439
+  user: admin
+  password: ""
+  database: analytics
+  db_schema: public
+  iam_role: arn:aws:iam::123456789012:role/RedshiftCopyRole
+
+starrocks:
+  host: starrocks-fe
+  port: 9030
+  user: root
+  password: ""
+  database: analytics
