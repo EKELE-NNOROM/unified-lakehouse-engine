@@ -1,16 +1,27 @@
 [
-  {
-    "event_id": "evt-001",
-    "event_type": "order.placed",
-    "customer_id": 1001,
-    "amount": 249.99,
-    "occurred_at": "2026-05-25T10:00:00Z"
-  },
-  {
-    "event_id": "evt-002",
-    "event_type": "order.shipped",
-    "customer_id": 1002,
-    "amount": 89.50,
-    "occurred_at": "2026-05-25T10:05:00Z"
-  }
+  {"event_id": "evt-001", "event_type": "order.placed", "customer_id": 1001, "amount": 249.99, "occurred_at": "2026-05-25T10:00:00Z"},
+  {"event_id": "evt-002", "event_type": "order.shipped", "customer_id": 1001, "amount": 249.99, "occurred_at": "2026-05-25T11:30:00Z"},
+  {"event_id": "evt-003", "event_type": "order.placed", "customer_id": 1002, "amount": 89.50, "occurred_at": "2026-05-25T10:05:00Z"},
+  {"event_id": "evt-004", "event_type": "click", "customer_id": 1002, "amount": 1, "occurred_at": "2026-05-25T09:55:00Z"},
+  {"event_id": "evt-005", "event_type": "page.view", "customer_id": 1003, "amount": 1, "occurred_at": "2026-05-25T10:10:00Z"},
+  {"event_id": "evt-006", "event_type": "order.placed", "customer_id": 1003, "amount": 512.00, "occurred_at": "2026-05-25T10:15:00Z"},
+  {"event_id": "evt-007", "event_type": "order.delivered", "customer_id": 1001, "amount": 249.99, "occurred_at": "2026-05-26T14:00:00Z"},
+  {"event_id": "evt-008", "event_type": "order.shipped", "customer_id": 1003, "amount": 512.00, "occurred_at": "2026-05-25T16:00:00Z"},
+  {"event_id": "evt-009", "event_type": "click", "customer_id": 1004, "amount": 1, "occurred_at": "2026-05-25T10:20:00Z"},
+  {"event_id": "evt-010", "event_type": "order.placed", "customer_id": 1004, "amount": 34.99, "occurred_at": "2026-05-25T10:25:00Z"},
+  {"event_id": "evt-011", "event_type": "page.view", "customer_id": 1005, "amount": 1, "occurred_at": "2026-05-25T11:00:00Z"},
+  {"event_id": "evt-012", "event_type": "order.placed", "customer_id": 1005, "amount": 1200.00, "occurred_at": "2026-05-25T11:05:00Z"},
+  {"event_id": "evt-013", "event_type": "order.shipped", "customer_id": 1005, "amount": 1200.00, "occurred_at": "2026-05-26T09:00:00Z"},
+  {"event_id": "evt-014", "event_type": "click", "customer_id": 1006, "amount": 1, "occurred_at": "2026-05-25T12:00:00Z"},
+  {"event_id": "evt-015", "event_type": "order.placed", "customer_id": 1006, "amount": 67.25, "occurred_at": "2026-05-25T12:05:00Z"},
+  {"event_id": "evt-016", "event_type": "page.view", "customer_id": 1007, "amount": 1, "occurred_at": "2026-05-25T13:00:00Z"},
+  {"event_id": "evt-017", "event_type": "order.placed", "customer_id": 1007, "amount": 445.00, "occurred_at": "2026-05-25T13:10:00Z"},
+  {"event_id": "evt-018", "event_type": "order.delivered", "customer_id": 1003, "amount": 512.00, "occurred_at": "2026-05-27T10:00:00Z"},
+  {"event_id": "evt-019", "event_type": "click", "customer_id": 1008, "amount": 1, "occurred_at": "2026-05-25T14:00:00Z"},
+  {"event_id": "evt-020", "event_type": "order.placed", "customer_id": 1008, "amount": 199.99, "occurred_at": "2026-05-25T14:05:00Z"},
+  {"event_id": "evt-021", "event_type": "order.shipped", "customer_id": 1004, "amount": 34.99, "occurred_at": "2026-05-26T08:00:00Z"},
+  {"event_id": "evt-022", "event_type": "page.view", "customer_id": 1009, "amount": 1, "occurred_at": "2026-05-25T15:00:00Z"},
+  {"event_id": "evt-023", "event_type": "order.placed", "customer_id": 1009, "amount": 78.00, "occurred_at": "2026-05-25T15:05:00Z"},
+  {"event_id": "evt-024", "event_type": "order.placed", "customer_id": 1010, "amount": 320.50, "occurred_at": "2026-05-25T16:00:00Z"},
+  {"event_id": "evt-025", "event_type": "order.delivered", "customer_id": 1005, "amount": 1200.00, "occurred_at": "2026-05-27T16:00:00Z"}
 ]

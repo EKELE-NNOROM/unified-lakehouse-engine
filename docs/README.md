@@ -13,5 +13,5 @@ Diagrams use [Mermaid](https://mermaid.js.org/). They render on GitHub, in VS Co
 ## Quick links
 
 - Reference DDL: [`../sql/schemas/init.sql`](../sql/schemas/init.sql)
-- Sample events: [`../examples/sample_events.json`](../examples/sample_events.json)
+- Seed data: [`../sql/seeds/`](../sql/seeds/) · [`../examples/sample_events.json`](../examples/sample_events.json)
 - Example config: [`../config/platform.example.yaml`](../config/platform.example.yaml)

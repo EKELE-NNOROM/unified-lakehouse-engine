@@ -30,6 +30,7 @@ Subcommands
 - ``stream``   — run the real-time Kafka → OLTP/OLAP pipeline
 - ``sync``     — incremental Iceberg → Trino → warehouse sync
 - ``query``    — run SQL routed by workload type (Vitess, TiDB, Trino, …)
+- ``seed``     — publish sample events to Kafka and optionally run stream
 
 For embedded use, prefer the Python API in ``engine.py`` instead of subprocess
 calls to this CLI.
@@ -179,3 +180,62 @@ def publish(ctx: click.Context, topic: str, file: str) -> None:
         click.echo(f"Published {len(events)} events to {topic}")
     finally:
         engine.kafka.close()
+
+
+@main.command()
+@click.option(
+    "--file",
+    "-f",
+    "file_path",
+    type=click.Path(exists=True),
+    default=None,
+    help="JSON events file (default: examples/sample_events.json in cwd).",
+)
+@click.option("--topic", default="events.raw", help="Kafka topic to publish to.")
+@click.option(
+    "--stream/--no-stream",
+    default=True,
+    help="After publish, run streaming pipeline to fan out to databases.",
+)
+@click.option("--batch-size", default=500, type=int, help="Max messages when streaming.")
+@click.pass_context
+def seed(
+    ctx: click.Context,
+    file_path: str | None,
+    topic: str,
+    stream: bool,
+    batch_size: int,
+) -> None:
+    """Seed demo data: publish events to Kafka, then optionally run stream.
+
+    Uses ``examples/sample_events.json`` (25 correlated events) when ``--file``
+    is omitted. For direct SQL loads without Kafka, see ``sql/seeds/``.
+    """
+    engine: LakehouseEngine = ctx.obj["engine"]
+    path = Path(file_path) if file_path else Path("examples/sample_events.json")
+    if not path.exists():
+        raise click.ClickException(
+            f"Seed file not found: {path}. Run from repo root or pass --file."
+        )
+
+    events = json.loads(path.read_text())
+    if isinstance(events, dict):
+        events = [events]
+
+    engine.kafka.connect()
+    try:
+        for event in events:
+            engine.publish_event(topic, event)
+        click.echo(f"Published {len(events)} events to {topic}")
+    finally:
+        engine.kafka.close()
+
+    if not stream:
+        return
+
+    engine.connect_all()
+    try:
+        count = engine.streaming_pipeline(topic).run(batch_size=batch_size)
+        click.echo(f"Streamed {count} events to configured targets")
+    finally:
+        engine.close_all()

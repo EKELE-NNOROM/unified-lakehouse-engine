@@ -63,7 +63,10 @@ copy config\platform.example.yaml platform.yaml
 # Health check (requires running services)
 lakehouse -c platform.yaml health
 
-# Publish sample events
+# Seed demo data (publish 25 events + run streaming pipeline)
+lakehouse -c platform.yaml seed
+
+# Or step by step:
 lakehouse -c platform.yaml publish events.raw -f examples/sample_events.json
 
 # Run streaming pipeline
@@ -96,8 +99,8 @@ src/lakehouse/
   engine.py       # Orchestration entry point (use this in code)
   cli.py          # `lakehouse` command (optional ops interface)
 config/           # Example YAML configuration
-sql/              # Reference DDL and Trino catalog properties
-examples/         # Sample event payloads
+sql/              # Reference DDL, Trino catalogs, seed INSERTs (sql/seeds/)
+examples/         # Sample event payloads (25 events)
 tests/
 ```
 
@@ -125,7 +128,7 @@ engine.close_all()
 
 Set cluster endpoints in `platform.yaml` (see `config/platform.example.yaml`). Environment overrides use the `LAKEHOUSE_` prefix with nested `__` delimiters.
 
-Apply table DDL from `sql/schemas/init.sql` on each engine. Mount Trino catalog definitions from `sql/trino/catalogs.properties` on your Trino coordinator.
+Apply table DDL from `sql/schemas/init.sql` on each engine. Optional seed data: `lakehouse seed` or manual SQL in `sql/seeds/`. Mount Trino catalog definitions from `sql/trino/catalogs.properties` on your Trino coordinator.
 
 ## License
 
